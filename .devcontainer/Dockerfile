@@ -19,3 +19,4 @@ RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requ
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 RUN pip install shap
+RUN pip install imbalanced-learn
