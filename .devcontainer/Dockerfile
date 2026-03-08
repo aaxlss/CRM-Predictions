@@ -7,6 +7,3 @@ COPY .devcontainer/requirements.txt /tmp/pip-tmp/
 # Install packages from requirements.txt
 RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
     && rm -rf /tmp/pip-tmp
-
-# Install other packages
-RUN pip install shap imbalanced-learn

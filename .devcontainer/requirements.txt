@@ -3,3 +3,11 @@ numpy
 scikit-learn
 matplotlib
 seaborn
+torch
+einops
+shap 
+imbalanced-learn
+xgboost
+pytorch_tabular
+tabpfn
+huggingface_hub
