@@ -11,3 +11,4 @@ xgboost
 pytorch_tabular
 tabpfn
 huggingface_hub
+lime
