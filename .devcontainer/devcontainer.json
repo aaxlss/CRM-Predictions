@@ -7,7 +7,7 @@
     "context": ".."
   },
 
-  "runArgs": ["--gpus", "all"],
+  "runArgs": ["--gpus", "all", "--shm-size", "16g"],
 
   "features": {
     "ghcr.io/devcontainers/features/common-utils": {}

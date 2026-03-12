@@ -4,3 +4,4 @@ lightning_logs
 *csv
 *.joblib
 *.html
+.env
