@@ -12,3 +12,4 @@ pytorch_tabular==1.2.0
 tabpfn==6.4.1
 huggingface_hub==1.6.0
 lime==0.2.0.1
+pytorch_tabnet
