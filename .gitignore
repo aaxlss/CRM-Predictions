@@ -1,7 +1,5 @@
 saved_models
 lightning_logs
 .pt_tmp
-*csv
-*.joblib
 *.html
 .env
