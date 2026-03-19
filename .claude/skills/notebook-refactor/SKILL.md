@@ -43,10 +43,26 @@ For each notebook found, use the Read tool to read its full JSON content. Then a
 - Find **repeated import statements** scattered across multiple cells instead of being consolidated at the top
 - Find **repeated patterns** such as: the same data loading snippet, the same plotting boilerplate, the same preprocessing steps applied multiple times with slight variations
 
+### 3b+. Deep semantic equivalence analysis
+Go beyond textual similarity — look for **semantic duplicates**: code that does the same thing even if variable names, function names, or structure differ. Specifically:
+
+- **Variable aliases**: Different variable names holding the same data at the same logical point (e.g., `df`, `data`, `dataset`, `raw_df` all pointing to the same loaded DataFrame). Map these aliases, flag inconsistencies, and standardize to a single name.
+- **Functionally equivalent calls**: Different invocations that produce the same result (e.g., `df.dropna()` vs `df[df.notna().all(axis=1)]`; `LabelEncoder().fit_transform(col)` vs `pd.get_dummies(col)` used interchangeably for the same column type). Flag these as candidates for unification.
+- **Repeated transformations on different targets**: Chains of operations that share identical logic but differ only in the variable or column they operate on (e.g., the same cleaning steps applied to `age` and then again to `income`). These are prime candidates for a parameterized helper function.
+- **Scattered constants**: Magic numbers, column names, file paths, or threshold values repeated across multiple cells. Flag for extraction into named constants at the top.
+
+For each semantic duplicate found, document:
+- The cells where each variant appears
+- What they share and how they differ
+- Whether they can be unified via a single parameterized function or a shared constant
+
 ### 3c. Abstraction opportunities (if mode 1 or 3)
-- For each group of repeated logic, design a Python function that abstracts it
-- The function should be placed in a dedicated `## Helper Functions` section after the imports
-- Use clear, descriptive function names following snake_case convention
+- For each group of repeated **or semantically equivalent** logic, design a single Python function that abstracts it
+- If two or more blocks do the same thing under different names or with minor variations, **merge them into one function** — do not keep parallel implementations
+- The unified function should accept parameters to handle the variations (e.g., column name, threshold, dataset)
+- Place all helper functions in the `## 🔧 Helper Functions` section after imports
+- Use descriptive snake_case names that reflect *what the function does*, not which variable it was originally written for
+- After abstracting, update **every call site** in all cells to use the new unified function
 
 ### 3d. Data science improvement analysis (if mode 2 or 3)
 Look for the following patterns and note any you find:
